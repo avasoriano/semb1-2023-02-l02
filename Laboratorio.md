@@ -12,29 +12,29 @@ R: Acender o LED quando o botão conectado a PA0 for pressionado, você pode seg
 
 #include "stm32f4xx.h"
 
-int main(void)
-{
-    // Configurar o pino PA0 como entrada
-    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN; GPIOA->MODER &= ~GPIO_MODER_MODER0;
-
-    // Configurar o pino PC13 como saída
-    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN; GPIOC->MODER |= GPIO_MODER_MODER13_0;
-
-    while (1)
+    int main(void)
     {
-        // Ler o estado do botão (PA0)
-        if (GPIOA->IDR & GPIO_IDR_IDR_0)
+        // Configurar o pino PA0 como entrada
+        RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN; GPIOA->MODER &= ~GPIO_MODER_MODER0;
+    
+        // Configurar o pino PC13 como saída
+        RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN; GPIOC->MODER |= GPIO_MODER_MODER13_0;
+    
+        while (1)
         {
-            // Botão pressionado: acender o LED (PC13)
-            GPIOC->BSRR = GPIO_BSRR_BS_13;
-        }
-        else
-        {
-            // Botão solto: apagar o LED (PC13)
-            GPIOC->BSRR = GPIO_BSRR_BR_13;
+            // Ler o estado do botão (PA0)
+            if (GPIOA->IDR & GPIO_IDR_IDR_0)
+            {
+                // Botão pressionado: acender o LED (PC13)
+                GPIOC->BSRR = GPIO_BSRR_BS_13;
+            }
+            else
+            {
+                // Botão solto: apagar o LED (PC13)
+                GPIOC->BSRR = GPIO_BSRR_BR_13;
+            }
         }
     }
-}
 
 ## 2. Faça um novo *fork* deste repositório e altere o programa para que, ao se pressionar o botão conectado a PA0 o estado do LED seja trocado, ou seja, caso o LED esteja apagado ao se pressionar o LED uma vez o mesmo deve acender ao pressionar o botão o LED deverá apagar.
 
