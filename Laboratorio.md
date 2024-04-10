@@ -37,8 +37,7 @@ R: Acender o LED quando o botão conectado a PA0 for pressionado, você pode seg
 
 ## 2. Faça um novo *fork* deste repositório e altere o programa para que, ao se pressionar o botão conectado a PA0 o estado do LED seja trocado, ou seja, caso o LED esteja apagado ao se pressionar o LED uma vez o mesmo deve acender ao pressionar o botão o LED deverá apagar.
 
-#include "stm32f4xx.h"
-
+## CÓDIGO:
     int main(void)
     {
         // Configurar o pino PA0 como entrada
