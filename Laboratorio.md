@@ -10,8 +10,7 @@ R: Acender o LED quando o botão conectado a PA0 for pressionado, você pode seg
 3) Ler o Estado do Botão: dentro do loop principal, leia o estado do botão (se está pressionado ou solto).
 4) Controlar o LED: se o botão estiver pressionado, acenda o LED conectado ao pino PC13.Se o botão estiver solto, apague o LED.
 
-#include "stm32f4xx.h"
-
+## CÓDIGO:
     int main(void)
     {
         // Configurar o pino PA0 como entrada
