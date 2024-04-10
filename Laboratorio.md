@@ -12,8 +12,8 @@ R: Acender o LED quando o botão conectado a PA0 for pressionado, você pode seg
 
 #include "stm32f4xx.h"
 
-int main(void)
-{
+// int main(void)
+//{
     // Configurar o pino PA0 como entrada
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN; GPIOA->MODER &= ~GPIO_MODER_MODER0;
 
