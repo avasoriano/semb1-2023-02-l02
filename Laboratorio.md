@@ -40,39 +40,39 @@ R: Acender o LED quando o botão conectado a PA0 for pressionado, você pode seg
 
 #include "stm32f4xx.h"
 
-int main(void)
-{
-    // Configurar o pino PA0 como entrada
-    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN; GPIOA->MODER &= ~GPIO_MODER_MODER0;
-
-    // Configurar o pino PC13 como saída
-    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN; GPIOC->MODER |= GPIO_MODER_MODER13_0;
-
-    // Variável para controlar o estado do LED
-    int ledLigado = 0;
-
-    while (1)
+    int main(void)
     {
-        // Ler o estado do botão (PA0)
-        if (GPIOA->IDR & GPIO_IDR_IDR_0)
+        // Configurar o pino PA0 como entrada
+        RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN; GPIOA->MODER &= ~GPIO_MODER_MODER0;
+    
+        // Configurar o pino PC13 como saída
+        RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN; GPIOC->MODER |= GPIO_MODER_MODER13_0;
+    
+        // Variável para controlar o estado do LED
+        int ledLigado = 0;
+    
+        while (1)
         {
-            // Botão pressionado: alternar o estado do LED
-            if (ledLigado)
+            // Ler o estado do botão (PA0)
+            if (GPIOA->IDR & GPIO_IDR_IDR_0)
             {
-                GPIOC->BSRR = GPIO_BSRR_BR_13; // Apagar o LED
-                ledLigado = 0;
-            }
-            else
-            {
-                GPIOC->BSRR = GPIO_BSRR_BS_13; // Acender o LED
-                ledLigado = 1;
-            }
-
-            // Aguardar um breve intervalo para evitar leituras múltiplas
-            for (volatile int i = 0; i < 100000; ++i)
-            {
-                // Espera
+                // Botão pressionado: alternar o estado do LED
+                if (ledLigado)
+                {
+                    GPIOC->BSRR = GPIO_BSRR_BR_13; // Apagar o LED
+                    ledLigado = 0;
+                }
+                else
+                {
+                    GPIOC->BSRR = GPIO_BSRR_BS_13; // Acender o LED
+                    ledLigado = 1;
+                }
+    
+                // Aguardar um breve intervalo para evitar leituras múltiplas
+                for (volatile int i = 0; i < 100000; ++i)
+                {
+                    // Espera
+                }
             }
         }
     }
-}
